@@ -24,10 +24,18 @@ Run unit tests
 php artisan test
 ```
 
+Steps
+>Register
+>Login
+>Take token and use it as bearer Token in all Authorized requests
+>Add product
+>check cart
 
-## 2) Rest API
 
-#### Get Products (Anonymous)
+
+## 2) Rest API - Guest (Anonymous)
+
+#### Get Products 
 
 #### Request
 `GET /Products/`
@@ -48,12 +56,12 @@ php artisan test
 
 ----
 
-#### Get Offers (Anonymous)
+#### Get Offers
 
 #### Request
 `GET /Offers/`
 ```sh
-    curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/offers
+    curl -i -H 'Accept:application/json' http://127.0.0.1:8000/api/v1/offers
 ```
 #### Response
 {
@@ -68,6 +76,26 @@ php artisan test
 }
 
 ----
+
+#### Register
+
+#### Request
+`POST /Offers/`
+```sh
+    curl -i -H 'Accept:application/json' http://127.0.0.1:8000/api/v1/offers
+```
+#### Response
+{
+    "success": true,
+    "data": {
+        "count": 3,
+        "offers": 
+        [
+            .......
+        ]
+    }
+}
+
 Auth --> Register      /api/v1/register
 	--> Login   /api/v1/login
 
