@@ -25,10 +25,10 @@ php artisan test
 ```
 
 Steps
->Register
->Login
->Take token and use it as bearer Token in all Authorized requests
->Add product
+>Register\
+>Login\
+>Take token and use it as bearer Token in all Authorized requests\
+>Add product\
 >check cart
 
 
