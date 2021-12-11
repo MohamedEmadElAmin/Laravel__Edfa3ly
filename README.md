@@ -1,6 +1,6 @@
 # Instructions
 
-#### 1) Setup Enviroment (Laravel 8) - PHP 7.4
+## 1) Setup Enviroment (Laravel 8) - PHP 7.4
 
 Install the dependencies
 ```sh
@@ -11,7 +11,7 @@ Create the database or you can create it and update .env file
 ```sh
 php artisan make:database
 ```
-create tables & initial data
+Create tables & Initial data
 ```sh
 php artisan migrate
 php artisan db:seed productsBundle
@@ -19,15 +19,19 @@ php artisan db:seed offersBundle
 composer dump-autoload
 php artisan serve
 ```
+Run unit tests
+```sh
+php artisan test
+```
 
 
-#### 2) Rest API
+## 2) Rest API
 
 ### Get Products (Anonymous)
 
 ### Request
 
-`GET /thing/`
+`GET /Products/`
 
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/products
 ### Response
@@ -38,21 +42,32 @@ php artisan serve
         "count": 6,
         "products": 
         [
-            {
-                "name": "T-shirt",
-                "price": "30.99",
-                "weight_kg": "0.20",
-                "shipping_fees": "4.00"
-            },
+           ......
+        ]
+    }
+}
+----
+
+### Get Offers (Anonymous)
+
+### Request
+
+`GET /Offers/`
+
+    curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/offers
+### Response
+
+{
+    "success": true,
+    "data": {
+        "count": 3,
+        "offers": 
+        [
             .......
         ]
     }
 }
-   
 
-
-/api/v1/products
-	--> Get Offers  /api/v1/offers
 
 Auth --> Register      /api/v1/register
 	--> Login   /api/v1/login
