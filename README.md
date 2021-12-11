@@ -27,14 +27,15 @@ php artisan test
 
 ## 2) Rest API
 
-### Get Products (Anonymous)
+#### Get Products (Anonymous)
 
-### Request
+#### Request
 
 `GET /Products/`
-
+```sh
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/products
-### Response
+```
+#### Response
 
 {
     "success": true,
@@ -48,14 +49,15 @@ php artisan test
 }
 ----
 
-### Get Offers (Anonymous)
+#### Get Offers (Anonymous)
 
-### Request
+#### Request
 
 `GET /Offers/`
-
+```sh
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/offers
-### Response
+```
+#### Response
 
 {
     "success": true,
