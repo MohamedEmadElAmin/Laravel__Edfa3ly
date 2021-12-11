@@ -82,13 +82,15 @@ Steps
     "data": {
         "name": "user3"
     }
-
+    
+----
 
 #### POST - Login
 
 ```sh
     curl -d "name=user3&email=user3@user.com&password=user3&password_confirmation=user3" -X POST http://127.0.0.1:8000/api/v1/register
 ```
+
 ## 3) Rest API - Customer (Authentication-Bearer Token)
 ```sh
  POST   /api/v1/logout
