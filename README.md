@@ -30,7 +30,6 @@ php artisan test
 #### Get Products (Anonymous)
 
 #### Request
-
 `GET /Products/`
 ```sh
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/products
@@ -52,7 +51,6 @@ php artisan test
 #### Get Offers (Anonymous)
 
 #### Request
-
 `GET /Offers/`
 ```sh
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/offers
