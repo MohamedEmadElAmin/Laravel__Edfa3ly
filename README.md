@@ -32,6 +32,8 @@ Steps
 >check cart
 
 
+![alt text](https://github.com/TheBlackStar/Edfa3ly-Assessment/blob/master/public/edfa3ly_dbDesign.png)
+
 
 ## 2) Rest API - Guest (Anonymous)
 
