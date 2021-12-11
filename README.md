@@ -24,18 +24,22 @@ Run unit tests
 php artisan test
 ```
 
+Steps
+>Register\
+>Login\
+>Take token and use it as bearer Token in all Authorized requests\
+>Add product\
+>check cart
 
-## 2) Rest API
 
-### Get Products (Anonymous)
 
-### Request
+## 2) Rest API - Guest (Anonymous)
 
-`GET /Products/`
-
-    curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/products
-### Response
-
+#### Get - Products 
+```sh
+    curl -i -H 'Accept:application/json' http://127.0.0.1:8000/api/v1/products
+```
+#### Response
 {
     "success": true,
     "data": {
@@ -46,17 +50,14 @@ php artisan test
         ]
     }
 }
+
 ----
 
-### Get Offers (Anonymous)
-
-### Request
-
-`GET /Offers/`
-
-    curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/offers
-### Response
-
+#### Get - Offers
+```sh
+    curl -i -H 'Accept:application/json' http://127.0.0.1:8000/api/v1/offers
+```
+#### Response
 {
     "success": true,
     "data": {
@@ -68,15 +69,37 @@ php artisan test
     }
 }
 
+----
 
-Auth --> Register      /api/v1/register
-	--> Login   /api/v1/login
+#### POST - Register
 
-After login take token and use it as bearer Token
+```sh
+    curl -d "name=user3&email=user3@user.com&password=user3&password_confirmation=user3" -X POST http://127.0.0.1:8000/api/v1/register
+```
+#### Response
+ "success": true,
+    "message": "User register successfully, Please Login.",
+    "data": {
+        "name": "user3"
+    }
+    
+----
 
-Customer 
---> /api/v1/logout
-/api/v1/carts/mine
-/api/v1/carts/mine/items
-/api/v1/carts/mine/items
-/api/v1/carts/mine/items
+#### POST - Login
+
+```sh
+    curl -d "name=user3&email=user3@user.com&password=user3&password_confirmation=user3" -X POST http://127.0.0.1:8000/api/v1/register
+```
+
+## 3) Rest API - Customer (Authentication-Bearer Token)
+```sh
+ POST   /api/v1/logout
+ GET   /api/v1/carts/mine
+```
+```sh
+ POST   /api/v1/carts/mine/items
+ DELETE   /api/v1/carts/mine/items
+ GET   /api/v1/carts/mine/items
+```
+
+
