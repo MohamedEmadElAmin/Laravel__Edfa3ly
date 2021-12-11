@@ -36,9 +36,6 @@ Steps
 ## 2) Rest API - Guest (Anonymous)
 
 #### Get Products 
-
-#### Request
-`GET /Products/`
 ```sh
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/products
 ```
@@ -57,9 +54,6 @@ Steps
 ----
 
 #### Get Offers
-
-#### Request
-`GET /Offers/`
 ```sh
     curl -i -H 'Accept:application/json' http://127.0.0.1:8000/api/v1/offers
 ```
