@@ -21,12 +21,12 @@ class OfferCondition extends Model
         'bought_product_id'
     ];
 
-    public function getCategory()
+    public function category()
     {
         return $this->hasOne(OfferCondition::class , 'id' , 'bought_category_id');
     }
 
-    public function getProduct()
+    public function product()
     {
         return $this->hasOne(OfferDiscount::class , 'id' , 'bought_product_id');
     }

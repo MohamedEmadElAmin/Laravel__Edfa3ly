@@ -18,24 +18,25 @@ class OffersBundle extends Seeder
      */
     public function run()
     {
-        $t_shirt = Product::where('name', 'T-shirt')->first();
+        $shoes = Product::where('name', 'Shoes')->first();
+        $jacket = Product::where('name', 'Jacket')->first();
         $topsID = ProductCategory::where('name', 'tops')->first()->id;
 
 
-        $this->createOfferConditions($topsID, $t_shirt);
-        $this->createOfferDiscounts($topsID, $t_shirt);
+        $this->createOfferConditions($topsID, $shoes);
+        $this->createOfferDiscounts($shoes , $jacket);
         $this->createOffers($topsID);
     }
 
 
 
-    private function createOfferConditions($topsID, $t_shirt)
+    private function createOfferConditions($topsID, $shoes)
     {
         DB::table('offer_conditions')->insert
         ([
             //Shoes are on 10% off.
             ['min_bought_items' => 1, 'can_be_activated_multiple_times' => true, 'bought_category_id' => NULL,
-                'bought_product_id' => $t_shirt->id],
+                'bought_product_id' => $shoes->id],
 
             //Buy any two tops (t-shirt or blouse) and get any jacket half its price.
             ['min_bought_items' => 2, 'can_be_activated_multiple_times' => true, 'bought_category_id' => $topsID,
@@ -46,38 +47,34 @@ class OffersBundle extends Seeder
                 'bought_product_id' => NULL]
         ]);
     }
-    private function createOfferDiscounts($topsID, $t_shirt)
+    private function createOfferDiscounts($shoes, $jacket)
     {
         DB::table('offer_discounts')->insert
         ([
             //Shoes are on 10% off.
-            ['discount_percentage' => 10, 'discount_fixed' => NULL, 'discount_form' => NULL,
-                'discount_product_id' => $t_shirt->id , 'discount_category_id' => NULL],
+            ['discount_type' => 'percentage', 'discount_value' => 10, 'discount_from' => 'price',
+                'discount_product_id' => $shoes->id],
 
             //Buy any two tops (t-shirt or blouse) and get any jacket half its price.
-            ['discount_percentage' => 50, 'discount_fixed' => NULL, 'discount_form' => NULL,
-                'discount_product_id' => NULL, 'discount_category_id' => $topsID],
+            ['discount_type' => 'percentage', 'discount_value' => 50, 'discount_from' => 'price',
+                'discount_product_id' => $jacket->id],
 
             //Buy any two items or more and get a maximum of $10 off shipping fees.
-            ['discount_percentage' => NULL, 'discount_fixed' => 10, 'discount_form' => 'ShippingFees',
-                'discount_product_id' => NULL, 'discount_category_id' => NULL]
+            ['discount_type' => 'fixed', 'discount_value' => 10, 'discount_from' => 'shippingFees',
+                'discount_product_id' => NULL]
         ]);
     }
     private function createOffers($topsID)
     {
         $conditions = OfferCondition::all();
-        $cond1 = findInList($conditions , 'min_bought_items' , 1);
-        $cond2 = findInList($conditions , 'bought_category_id' , $topsID);
-        $cond3 = findInListMultiple($conditions , ["conditions" =>
-            [
-                ["pName" => 'min_bought_items' , 'pValue' => 2],
-                ["pName" => 'can_be_activated_multiple_times' , 'pValue' => false],
-            ]]);
+        $cond1 = _findInList($conditions , 'min_bought_items' , 1);
+        $cond2 = _findInList($conditions , 'bought_category_id' , $topsID);
+        $cond3 = _findInListMultiple($conditions , [ 'min_bought_items' => 2,'can_be_activated_multiple_times' => false]);
 
         $discounts = OfferDiscount::all();
-        $disc1 = findInList($discounts , 'discount_percentage' , 10);
-        $disc2 = findInList($discounts , 'discount_percentage' , 50);
-        $disc3 = findInList($discounts , 'discount_fixed' , 10);
+        $disc1 = _findInList($discounts , 'discount_value' , 10);
+        $disc2 = _findInList($discounts , 'discount_value' , 50);
+        $disc3 = _findInListMultiple($discounts , ['discount_value' => 10 , 'discount_from' => 'shippingFees']);
 
         DB::table('offers')->insert
         ([

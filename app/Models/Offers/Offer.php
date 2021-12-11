@@ -23,12 +23,12 @@ class Offer extends Model
 
 
     //Eloquent ORM RelationShip (Not in the database)
-    public function getCondition()
+    public function condition()
     {
         return $this->hasOne(OfferCondition::class , 'id' , 'condition_id');
     }
 
-    public function getDiscount()
+    public function discount()
     {
         return $this->hasOne(OfferDiscount::class , 'id' , 'discount_id');
     }

@@ -16,11 +16,11 @@ class CreateOfferDiscountsTable extends Migration
         Schema::create('offer_discounts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->decimal('discount_percentage')->unsigned()->nullable();
-            $table->decimal('discount_fixed')->unsigned()->nullable();
-            $table->string('discount_form')->nullable();
-            $table->foreignId('discount_category_id')->nullable()->references('id')
-                ->on('product_categories')->onDelete('set null');
+            $table->string('discount_type');
+            $table->decimal('discount_value')->unsigned()->nullable();
+            $table->string('discount_from');
+//            $table->foreignId('discount_category_id')->nullable()->references('id')
+//                ->on('product_categories')->onDelete('set null');
             $table->foreignId('discount_product_id')->nullable()->references('id')
                 ->on('products')->onDelete('set null');
         });

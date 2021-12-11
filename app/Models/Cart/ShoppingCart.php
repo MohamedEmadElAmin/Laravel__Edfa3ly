@@ -16,15 +16,20 @@ class ShoppingCart extends Model
      * @var string[]
      */
     protected $fillable = [
-        'subtotal',
-        'shipping',
-        'vat',
-        'total',
+        'subtotal' => 0,
+        'shipping_fees' => 0,
+        'vat' => 0,
+        'total' => 0,
+        'subtotal_wo_offers' => 0,
+        'shipping_fees_wo_offers' => 0,
+        'vat_wo_offers' => 0,
+        'total_wo_offers' => 0,
+        'discount_shipping_fees' => 0,
         'user_id',
     ];
 
     //Eloquent ORM RelationShip (Not in the database)
-    public function getUser()
+    public function user()
     {
         return $this->hasOne(User::class , 'id' , 'user_id');
     }

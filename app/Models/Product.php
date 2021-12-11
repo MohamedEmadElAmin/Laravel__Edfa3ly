@@ -19,18 +19,19 @@ class Product extends Model
         'price',
         'weight_kg',
         'shipping_fees',
+        'hash',
         'shipped_from_country_id',
         'category_id',
     ];
 
 
     //Eloquent ORM RelationShip (Not in the database)
-    public function getShippedCountry()
+    public function shippedCountry()
     {
         return $this->hasOne(Country::class , 'id' , 'shipped_from_country_id');
     }
 
-    public function getCategory()
+    public function category()
     {
         return $this->hasOne(ProductCategory::class , 'id' , 'category_id');
     }

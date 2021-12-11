@@ -15,19 +15,14 @@ class OfferDiscount extends Model
      * @var string[]
      */
     protected $fillable = [
-        'discount_percentage',
-        'discount_fixed',
-        'discount_form',
-        'discount_category_id',
+        'discount_type',
+        'discount_value',
+        'discount_from',
         'discount_product_id'
     ];
 
-    public function getCategory()
-    {
-        return $this->hasOne(OfferCondition::class , 'id' , 'discount_category_id');
-    }
 
-    public function getProduct()
+    public function product()
     {
         return $this->hasOne(OfferDiscount::class , 'id' , 'discount_product_id');
     }

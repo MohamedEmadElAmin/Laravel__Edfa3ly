@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Country;
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +22,8 @@ class ProductsBundle extends Seeder
         $this->createProductCategories();
 
         $productCategories = ProductCategory::all();
-        $topsID = findInList($productCategories , 'name' , 'tops')->id;
-        $defaultID = findInList($productCategories , 'name' , 'default')->id;
+        $topsID = _findInList($productCategories , 'name' , 'tops')->id;
+        $defaultID = _findInList($productCategories , 'name' , 'default')->id;
         $this->createProducts($topsID, $defaultID);
     }
 
@@ -55,9 +56,9 @@ class ProductsBundle extends Seeder
     {
         //generic function defined helpers.php
         $countries = Country::all();
-        $us = findInList($countries , 'name' , 'US');
-        $uk = findInList($countries , 'name' , 'UK');
-        $cn = findInList($countries , 'name' , 'CN');
+        $us = _findInList($countries , 'name' , 'US');
+        $uk = _findInList($countries , 'name' , 'UK');
+        $cn = _findInList($countries , 'name' , 'CN');
 
 
 
@@ -74,18 +75,26 @@ class ProductsBundle extends Seeder
         DB::table('products')->insert
         ([
             ['name' => 'T-shirt', 'price' => 30.99, 'weight_kg' => 0.2, 'shipped_from_country_id' => $us->id,
-                'category_id' => $topsID, 'shipping_fees' => $shipping_fees_t_shirt ],
+                'category_id' => $topsID, 'shipping_fees' => $shipping_fees_t_shirt , 'hash' => _generateRandomString(200) ],
             ['name' => 'Blouse', 'price' => 10.99, 'weight_kg' => 0.3, 'shipped_from_country_id' => $uk->id,
-                'category_id' => $topsID, 'shipping_fees' => $shipping_fees_blouse],
+                'category_id' => $topsID, 'shipping_fees' => $shipping_fees_blouse , 'hash' => _generateRandomString(200) ],
             ['name' => 'Pants', 'price' => 64.99, 'weight_kg' => 0.9, 'shipped_from_country_id' => $uk->id,
-                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_pants],
+                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_pants , 'hash' => _generateRandomString(200) ],
             ['name' => 'Sweatpants', 'price' => 84.99, 'weight_kg' => 1.1, 'shipped_from_country_id' => $cn->id,
-                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_sweatpants],
+                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_sweatpants , 'hash' => _generateRandomString(200) ],
             ['name' => 'Jacket', 'price' => 199.99, 'weight_kg' => 2.2, 'shipped_from_country_id' => $us->id,
-                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_jacket],
+                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_jacket , 'hash' => _generateRandomString(200) ],
             ['name' => 'Shoes', 'price' => 79.99, 'weight_kg' => 1.3, 'shipped_from_country_id' => $cn->id,
-                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_shoes]
+                'category_id' => $defaultID, 'shipping_fees' => $shipping_fees_shoes , 'hash' => _generateRandomString(200) ]
         ]);
+
+        //Real Hash
+        $products = Product::select('id','hash')->get();
+        foreach ($products as $product) {
+            $product->hash  = _generateHash($product->id);
+            $product->save();
+        }
+
     }
     private function calculateShippingFeesForProduct($productWeight, Country $country)
     {

@@ -17,6 +17,11 @@ class CreateShoppingCartItemsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('quantity')->unsigned()->default(1);
+            $table->decimal('original_price')->unsigned()->default(0);
+            $table->decimal('discount_price')->unsigned()->default(0);
+            $table->decimal('original_shipping_fees')->unsigned()->default(0);
+
+
             $table->foreignId('product_id')
                 ->references('id')->on('products')->onDelete('cascade');
             $table->foreignId('shopping_cart_id')

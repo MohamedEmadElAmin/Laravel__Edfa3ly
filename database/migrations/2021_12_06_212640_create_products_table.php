@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name')->unique();
+            $table->string('hash',250)->unique();
             $table->decimal('price')->unsigned();
             $table->decimal('weight_kg')->unsigned();
             $table->decimal('shipping_fees')->unsigned();

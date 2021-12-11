@@ -5,7 +5,7 @@
  * #composer dump-autoload
  */
 
-function findInList($list ,string $parameterName, string $parameterValue)
+function _findInList($list ,string $parameterName, string $parameterValue)
 {
     foreach ($list as $item)
     {
@@ -15,24 +15,14 @@ function findInList($list ,string $parameterName, string $parameterValue)
 
     return NULL;
 }
-
-
-function findInListMultiple($list ,$params = [])
+function _findInListMultiple($list ,$conditions)
 {
-    $conditions = array_key_exists('conditions' , $params) ? $params['conditions'] : [];
     foreach ($list as $item)
     {
         $numberOfSuccessConditions = 0;
-        foreach ($conditions as $condition)
+        foreach ($conditions as $index => $value)
         {
-            $pName = array_key_exists('pName' , $condition) ? $condition['pName'] : -1;
-            $pValue = array_key_exists('pValue' , $condition) ? $condition['pValue'] : -1;
-
-            if($pName == -1 || $pValue == -1)
-                continue;
-
-
-            if($item->$pName == $pValue)
+            if($item->$index == $value)
                 $numberOfSuccessConditions++;
         }
 
@@ -41,4 +31,24 @@ function findInListMultiple($list ,$params = [])
     }
 
     return NULL;
+}
+function _generateHash($uniqueId): string
+{
+    $hash = preg_replace_callback('/[xy]/', function ($matches)
+    {
+        return dechex('x' == $matches[0] ? mt_rand(0, 15) : (mt_rand(0, 15) & 0x3 | 0x8));
+    }
+        , 'xxxx' . $uniqueId . 'xxxx');
+
+    return $hash . _generateRandomString(2);
+}
+function _generateRandomString($length = 10): string
+{
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }

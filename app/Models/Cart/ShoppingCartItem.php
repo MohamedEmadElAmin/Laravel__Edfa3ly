@@ -16,17 +16,20 @@ class ShoppingCartItem extends Model
      * @var string[]
      */
     protected $fillable = [
-        'quantity',
+        'quantity' => 1,
+        'original_price' => 0,
+        'discount_price' => 0,
+        'original_shipping_fees' => 0,
         'product_id',
         'shopping_cart_id',
     ];
 
-    public function getProduct()
+    public function product()
     {
         return $this->hasOne(Product::class , 'id' , 'product_id');
     }
 
-    public function getShoppingCart()
+    public function shoppingCart()
     {
         return $this->hasOne(ShoppingCart::class , 'id' , 'shopping_cart_id');
     }

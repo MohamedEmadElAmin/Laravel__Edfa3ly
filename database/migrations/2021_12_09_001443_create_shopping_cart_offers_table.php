@@ -16,6 +16,7 @@ class CreateShoppingCartOffersTable extends Migration
         Schema::create('shopping_cart_offers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->boolean('is_active')->default(false);
             $table->integer('quantity')->unsigned()->default(1);
             $table->foreignId('offer_id')
                 ->references('id')->on('offers')->onDelete('cascade');

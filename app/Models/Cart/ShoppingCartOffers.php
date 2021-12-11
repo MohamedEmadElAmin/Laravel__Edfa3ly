@@ -18,15 +18,16 @@ class ShoppingCartOffers extends Model
     protected $fillable = [
         'quantity',
         'offer_id',
+        'is_active',
         'shopping_cart_id',
     ];
 
-    public function getOffer()
+    public function offer()
     {
         return $this->hasOne(Offer::class , 'id' , 'offer_id');
     }
 
-    public function getShoppingCart()
+    public function shoppingCart()
     {
         return $this->hasOne(ShoppingCart::class , 'id' , 'shopping_cart_id');
     }
