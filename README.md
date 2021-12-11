@@ -32,7 +32,13 @@ Steps
 >check cart
 
 
+<<<<<<< HEAD
 
+=======
+![alt text](https://github.com/TheBlackStar/Edfa3ly-Assessment/blob/master/public/edfa3ly_dbDesign.png)
+
+
+>>>>>>> 9e4ae3e1104590a22fe5448b694e5a3bc38fb4c0
 ## 2) Rest API - Guest (Anonymous)
 
 #### Get - Products 
