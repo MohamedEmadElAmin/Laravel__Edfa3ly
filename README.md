@@ -36,7 +36,6 @@ php artisan test
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/products
 ```
 #### Response
-
 {
     "success": true,
     "data": {
@@ -47,6 +46,7 @@ php artisan test
         ]
     }
 }
+
 ----
 
 #### Get Offers (Anonymous)
@@ -58,7 +58,6 @@ php artisan test
     curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/offers
 ```
 #### Response
-
 {
     "success": true,
     "data": {
@@ -70,7 +69,7 @@ php artisan test
     }
 }
 
-
+----
 Auth --> Register      /api/v1/register
 	--> Login   /api/v1/login
 
